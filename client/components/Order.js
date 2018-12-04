@@ -14,6 +14,7 @@ const mapDispatchToProps = dispatch => ({
 const styles = StyleSheet.create({
   order: {
     padding: 20,
+    paddingBottom: 40,
     height: 'auto',
     width: 800,
     marginTop: 8,

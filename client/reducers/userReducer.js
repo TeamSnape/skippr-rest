@@ -125,6 +125,12 @@ const userReducer = (state=initialState, action) => {
         orders,
       };
 
+    case types.COMPLETE_ORDER:
+      console.log('QWERTY REDUCER CALLED', action.payload);
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

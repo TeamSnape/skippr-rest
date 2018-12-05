@@ -42,7 +42,7 @@ class Main extends React.Component {
   componentWillUnmount() {
     // Clear the interval right before component unmount
     clearInterval(this.interval);
-}
+  }
 
   render() {
     const ordersList = [];

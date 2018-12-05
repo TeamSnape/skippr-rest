@@ -22,10 +22,12 @@ const mapDispatchToProps = dispatch => ({
 const styles = StyleSheet.create({
   scroll: {
     marginTop: 10,
-    width: 1000,
+    flexGrow: 1,
+    width: '100%',
     borderWidth: 0.5,
     borderColor: 'lightgray',
-    borderRadius: 20
+    borderRadius: 20,
+    paddingBottom: 10,
   },
   userName: {
     marginTop: 10,
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   header: {
+    width: '100%',
     textAlign: 'center',
     fontSize: 35,
     fontWeight: 'bold',
@@ -82,11 +85,11 @@ class Main extends React.Component {
         index={0}>
 
         {/* Order History Page */}
-        <View>
-          <Text style={{ fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for testing 123 &rarr; </Text>
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for testing 123 &rarr; </Text>
           <Text style={styles.userName}>Welcome {this.props.restaurant}!</Text>
           <Text style={styles.header}>Order History</Text>
-          <ScrollView style={styles.scroll} contentContainerStyle={{ height: scrollViewHeight, flexGrow: 1, alignItems: 'center' }}>
+          <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
             {ordersList}
           </ScrollView>
         </View>

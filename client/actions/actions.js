@@ -11,13 +11,8 @@ export const logPass = (text) => ({
   payload: text,
 });
 
-// export const logIn = () => ({
-//   type: types.LOG_IN,
-// });
-
 export const logIn = (state) => {
   return (dispatch) => {
-    //fetch('http://192.168.0.105:3000/user/login', {
     fetch('http://redlippedbatfish.herokuapp.com/restaurant/login', {
       method: 'POST',
       mode: 'cors',

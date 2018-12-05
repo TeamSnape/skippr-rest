@@ -13,13 +13,14 @@ const mapDispatchToProps = dispatch => ({
 
 const styles = StyleSheet.create({
   order: {
-    padding: 20,
-    paddingBottom: 40,
     height: 'auto',
-    width: 800,
-    marginTop: 8,
+    width: 900,
+    marginTop: 30,
     marginBottom: 8,
-    backgroundColor: 'lightblue',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    borderColor: 'lightblue',
+    borderWidth: 1
   }
 });
 
@@ -37,9 +38,9 @@ const Order = (props) => {
   }
   return (
     <View style={styles.order}>
-      <Text style={{fontSize: 18, fontWeight: 'bold'}}>ORDER: {orderNum}</Text>
-      <Text style={{fontSize: 18, fontWeight: 'bold'}}>CUSTOMER: {fullName}</Text>
-      <Text style={{fontSize: 18, fontWeight: 'bold'}}>ITEMS:</Text>
+      <Text style={{fontSize: 25, fontWeight: 'bold', backgroundColor: 'lightblue', color: 'white', padding: 3}}>ORDER: {orderNum}</Text>
+      <Text style={{fontSize: 18, fontWeight: 'bold', padding: 5}}>CUSTOMER: {fullName}</Text>
+      <Text style={{fontSize: 18, fontWeight: 'bold', padding: 5}}>ITEMS:</Text>
       { orderItemsArray }
     </View>
   );

@@ -1,13 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, Button, Text, StyleSheet } from 'react-native';
 import store from '../store';
+import * as actions from '../actions/actions';
 
 const mapStateToProps = store => ({
 
 });
 
 const mapDispatchToProps = dispatch => ({
+  completeOrder: (orderNum) => {
+    dispatch(actions.completeOrder(orderNum));
+  }
 
 });
 
@@ -20,6 +24,15 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 8,
     backgroundColor: 'lightblue',
+  },
+  buttonContainer: {
+    marginTop: 20,
+    height: 30,
+    width: 100,
+    backgroundColor: 'white',
+  },
+  button: {
+    color: 'lightblue',
   }
 });
 
@@ -32,15 +45,18 @@ const Order = (props) => {
     props.order.forEach((orderItem, i) => {
       fullName = orderItem.user_firstname + ' ' + orderItem.user_lastname;
       orderNum = orderItem.fk_orders;
-      orderItemsArray.push(<Text style={{fontSize: 18, fontWeight: 'bold'}} key={i}>  • {orderItem.menu_item_name}</Text>);
+      orderItemsArray.push(<Text style={{ fontSize: 18, fontWeight: 'bold' }} key={i}> {orderItem.menu_item_name}</Text>);
     });
   }
   return (
     <View style={styles.order}>
-      <Text style={{fontSize: 18, fontWeight: 'bold'}}>ORDER: {orderNum}</Text>
-      <Text style={{fontSize: 18, fontWeight: 'bold'}}>CUSTOMER: {fullName}</Text>
-      <Text style={{fontSize: 18, fontWeight: 'bold'}}>ITEMS:</Text>
+      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>ORDER: {orderNum}</Text>
+      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>CUSTOMER: {fullName}</Text>
+      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>ITEMS:</Text>
       { orderItemsArray }
+      <View style={styles.buttonContainer}>
+        <Button style={styles.button} title="DONE" onPress={() => { props.completeOrder(orderNum); }} />
+      </View>
     </View>
   );
 };

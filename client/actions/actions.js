@@ -14,7 +14,7 @@ export const logPass = (text) => ({
 
 export const logIn = (state) => {
   return (dispatch) => {
-    fetch('http://redlippedbatfish.herokuapp.com/restaurant/login', {
+    fetch('http://redlippedbatfish.herokuapp.com/restaurant/login')
       .then((user) => {
         dispatch({
           type: types.LOG_IN,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Button, Text, StyleSheet } from 'react-native';
+import { View, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import store from '../store';
 import * as actions from '../actions/actions';
 
@@ -17,22 +17,35 @@ const mapDispatchToProps = dispatch => ({
 
 const styles = StyleSheet.create({
   order: {
-    padding: 20,
-    paddingBottom: 40,
+    paddingBottom: 20,
     height: 'auto',
-    width: 800,
+    width: 850,
     marginTop: 8,
     marginBottom: 8,
-    backgroundColor: 'lightblue',
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: 'lightblue',
+    borderRadius: 8
   },
   buttonContainer: {
     marginTop: 20,
-    height: 30,
-    width: 100,
+    marginBottom: 0,
     backgroundColor: 'white',
   },
   button: {
-    color: 'lightblue',
+    padding: 7,
+    backgroundColor: 'red',
+    borderColor: 'red',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginRight: 20,
+    marginLeft: 20,
+  },
+  buttonText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 23
   }
 });
 
@@ -45,17 +58,19 @@ const Order = (props) => {
     props.order.forEach((orderItem, i) => {
       fullName = orderItem.user_firstname + ' ' + orderItem.user_lastname;
       orderNum = orderItem.fk_orders;
-      orderItemsArray.push(<Text style={{ fontSize: 18, fontWeight: 'bold' }} key={i}> {orderItem.menu_item_name}</Text>);
+      orderItemsArray.push(<Text style={{ fontSize: 19, padding: 5, paddingLeft: 9, fontWeight: 'bold' }} key={i}>&bull; {orderItem.menu_item_name}</Text>);
     });
   }
   return (
     <View style={styles.order}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>ORDER: {orderNum}</Text>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>CUSTOMER: {fullName}</Text>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>ITEMS:</Text>
+      <Text style={{ fontSize: 25, padding: 5, color: 'white', backgroundColor: 'lightblue', fontWeight: 'bold'}}>ORDER: {orderNum}</Text>
+      <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>CUSTOMER: {fullName}</Text>
+      <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black', textDecorationLine: 'underline' }}>ITEMS:</Text>
       { orderItemsArray }
       <View style={styles.buttonContainer}>
-        <Button style={styles.button} title="DONE" onPress={() => { props.completeOrder(orderNum); }} />
+        <TouchableOpacity style={styles.button} onPress={() => { props.completeOrder(orderNum); }}> 
+          <Text style={styles.buttonText}>Close Order</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -1,5 +1,6 @@
 // import actionType constants
 import * as types from '../constants/actionTypes';
+// require('dotenv').config();
 
 export const logEmail = (text) => ({
   type: types.LOG_EMAIL,
@@ -18,7 +19,8 @@ export const logPass = (text) => ({
 export const logIn = (state) => {
   return (dispatch) => {
     //fetch('http://192.168.0.105:3000/user/login', {
-    fetch('http://redlippedbatfish.herokuapp.com/restaurant/login', {
+    // fetch('http://redlippedbatfish.herokuapp.com/restaurant/login', {
+      fetch('http://redlippedbatfish.herokuapp.com/restaurant/login', {
       method: 'POST',
       mode: 'cors',
       headers: {
@@ -64,4 +66,18 @@ export const getOrders = () => {
         });
       });
   };
+};
+
+export const completeOrder = orderNum => (dispatch) => {
+  const urlString = `http://redlippedbatfish.herokuapp.com/restaurant/orders/${orderNum}`;
+  console.log('QWERTY ACTION CALLED', orderNum, urlString);
+  fetch(urlString, {
+    method: 'PUT',
+  }).then(res => res.json())
+    .then((orderNum) => {
+      dispatch({
+        type: types.COMPLETE_ORDER,
+        payload: orderNum,
+      });
+    });
 };

@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, NavigatorIOS } from 'react-native';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 // import from child components...
@@ -27,8 +27,7 @@ class MainContainer extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.subtitle}>Ready to see your coffee orders?</Text>
-        <Logged />
+        <Logged navigator={this.props.navigator}/>
       </View>
     );
   }
@@ -40,15 +39,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: 1000,
-    marginTop: 20,
+    marginLeft: 55,
+    marginRight: 55,
+    marginTop: 10,
     paddingTop: 10,
     paddingLeft: 5,
     paddingRight: 5,
     backgroundColor: 'white',
     alignItems: 'center',
-  },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold'
+    textAlign: 'center'
   },
 });

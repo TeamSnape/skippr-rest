@@ -58,7 +58,7 @@ class Main extends React.Component {
 
   componentWillMount() {
     this.props.onLoad();
-    this.interval = setInterval(this.props.onLoad, 5000);
+    this.interval = setInterval(this.props.onLoad, 1000);
   }
 
   componentWillUnmount() {
@@ -67,14 +67,24 @@ class Main extends React.Component {
   }
 
   render() {
-    let numOfOrders;
-    const ordersList = [];
+    let numOfPendingOrders;
+    let numOfCompletedOrders;
+    let restaurantName = '';
+    const pendingOrdersList = [];
+    const completedOrdersList = [];
     if (this.props.orders !== undefined) {
       const groupedOrders = groupByUniqueOrders(this.props.orders);
-      numOfOrders = groupedOrders.length;
-      for (let i = 0; i < groupedOrders.length; i += 1) {
-        ordersList.push(<Order key={i} order={groupedOrders[i]} />);
+      const groupedOrdersTrue = groupedOrders[0];
+      const groupedOrdersFalse = groupedOrders[1];
+      restaurantName = groupedOrders[2];
+      for (let i = 0; i < groupedOrdersTrue.length; i += 1) {
+        pendingOrdersList.push(<Order key={i} order={groupedOrdersTrue[i]} />);
       }
+      for (let i = 0; i < groupedOrdersFalse.length; i += 1) {
+        completedOrdersList.push(<OrderHist key={i} order={groupedOrdersFalse[i]} />);
+      }
+      numOfPendingOrders = pendingOrdersList.length;
+      numOfCompletedOrders = completedOrdersList.length;
     }
     const scrollViewHeight = '80%';
 
@@ -87,54 +97,74 @@ class Main extends React.Component {
 
         {/* Pending Order Page */}
         <View style={{flex: 1, alignItems: 'center'}}>
-          <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for testing 123 &rarr; </Text>
-          <Text style={styles.userName}>Welcome {}!</Text>
-          <Text style={styles.header}>Pending Orders: {numOfOrders}</Text>
+          <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for Order HIstory &rarr; </Text>
+          <Text style={styles.userName}>Welcome {restaurantName}!</Text>
+          <Text style={styles.header}>Pending Orders: {numOfPendingOrders}</Text>
           <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
-            {ordersList}
+            {pendingOrdersList}
           </ScrollView>
         </View>
 
         {/* Completed Order Page */}
         <View style={{flex: 1, alignItems: 'center'}}>
-          <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for testing 123 &rarr; </Text>
-          <Text style={styles.userName}>Welcome {}!</Text>
-          <Text style={styles.header}>Completed Orders: {numOfOrders}</Text>
+          <Text style={{ width: '100%', fontSize: 20, textAlign: 'center', color: 'gray', fontStyle: 'italic' }}> &larr; Swipe for Order HIstory                                                                                           Swipe for Manage Menu &rarr; </Text>
+          <Text style={styles.userName}>Welcome {restaurantName}!</Text>
+          <Text style={styles.header}>Completed Orders: {numOfCompletedOrders}</Text>
           <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
-            {ordersList}
+            {completedOrdersList}
           </ScrollView>
         </View>
 
         {/* Mnage Menu Page */}
         <View style={{flex: 1, alignItems: 'center'}}>
-          <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for testing 123 &rarr; </Text>
-          <Text style={styles.userName}>Welcome {}!</Text>
-          <Text style={styles.header}>Manage Menu: {numOfOrders}</Text>
+          <Text style={{ width: '100%', fontSize: 20, textAlign: 'left', color: 'gray', fontStyle: 'italic' }}> &larr; Swipe for Order History</Text>
+          <Text style={styles.userName}>Welcome {restaurantName}!</Text>
+          <Text style={styles.header}>Manage Menu</Text>
           <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
-            {ordersList}
           </ScrollView>
         </View>
 
       </Swiper>
     );
   }
-
-
-
 }
 
 function groupByUniqueOrders(inputArray) {
+  let restName = '';
   const output = [];
-  const groupByOrderNum = {};
+
+  const outputTrue = [];
+  const outputFalse = [];
+
+  const groupByOrderNumTrue = {};
+  const groupByOrderNumFalse = {};
+
   inputArray.forEach((obj) => {
-    if (!groupByOrderNum[obj.fk_orders]) {
-      groupByOrderNum[obj.fk_orders] = [];
+    if (obj.order_ready) {
+      restName = obj.rest_name;
+      if (!groupByOrderNumTrue[obj.fk_orders]) {
+        groupByOrderNumTrue[obj.fk_orders] = [];
+      }
+      groupByOrderNumTrue[obj.fk_orders].push(obj);
+    } else if (!obj.order_ready) {
+      restName = obj.rest_name;
+      if (!groupByOrderNumFalse[obj.fk_orders]) {
+        groupByOrderNumFalse[obj.fk_orders] = [];
+      }
+      groupByOrderNumFalse[obj.fk_orders].push(obj);
     }
-    groupByOrderNum[obj.fk_orders].push(obj);
   });
-  for(let key in groupByOrderNum) {
-    output.push(groupByOrderNum[key]);
-   }
+  for(let key in groupByOrderNumTrue) {
+    outputTrue.push(groupByOrderNumTrue[key]);
+  }
+  for(let key in groupByOrderNumFalse) {
+    outputFalse.push(groupByOrderNumFalse[key]);
+  }
+
+  output.push(outputFalse);
+  output.push(outputTrue);
+  output.push(restName);
+
   return output;
 }
 

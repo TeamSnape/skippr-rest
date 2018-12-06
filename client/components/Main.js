@@ -3,10 +3,10 @@ import { ScrollView, View, Text, StyleSheet, TouchableOpacity, NavigatorIOS } fr
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import Order from './Order';
+import OrderHist from './OrderHist';
+import ManageMenu from './ManageMenu';
 import Swiper from 'react-native-swiper';
 
-// testing purposes
-import Login from './Login'
 
 const mapStateToProps = store => ({
   restaurant: store.user.name,
@@ -67,10 +67,11 @@ class Main extends React.Component {
   }
 
   render() {
-
+    let numOfOrders;
     const ordersList = [];
     if (this.props.orders !== undefined) {
       const groupedOrders = groupByUniqueOrders(this.props.orders);
+      numOfOrders = groupedOrders.length;
       for (let i = 0; i < groupedOrders.length; i += 1) {
         ordersList.push(<Order key={i} order={groupedOrders[i]} />);
       }
@@ -84,22 +85,34 @@ class Main extends React.Component {
         showPagination={false}
         index={0}>
 
-        {/* Order History Page */}
+        {/* Pending Order Page */}
         <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for testing 123 &rarr; </Text>
-          <Text style={styles.userName}>Welcome {this.props.restaurant}!</Text>
-          <Text style={styles.header}>Order History</Text>
+          <Text style={styles.userName}>Welcome {}!</Text>
+          <Text style={styles.header}>Pending Orders: {numOfOrders}</Text>
           <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
             {ordersList}
           </ScrollView>
         </View>
 
-        <View>
-          <Text>TESTING 1 2 3</Text>
+        {/* Completed Order Page */}
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for testing 123 &rarr; </Text>
+          <Text style={styles.userName}>Welcome {}!</Text>
+          <Text style={styles.header}>Completed Orders: {numOfOrders}</Text>
+          <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
+            {ordersList}
+          </ScrollView>
         </View>
 
-         <View>
-          <Text>TESTING 4 5 6</Text>
+        {/* Mnage Menu Page */}
+        <View style={{flex: 1, alignItems: 'center'}}>
+          <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for testing 123 &rarr; </Text>
+          <Text style={styles.userName}>Welcome {}!</Text>
+          <Text style={styles.header}>Manage Menu: {numOfOrders}</Text>
+          <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
+            {ordersList}
+          </ScrollView>
         </View>
 
       </Swiper>

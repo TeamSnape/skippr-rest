@@ -14,7 +14,7 @@ export const logPass = (text) => ({
 
 export const logIn = (state) => {
   return (dispatch) => {
-    fetch('http://redlippedbatfish.herokuapp.com/restaurant/login')
+    fetch('https://infinite-waters-83473.herokuapp.com/restaurant/login')
       .then((user) => {
         dispatch({
           type: types.LOG_IN,
@@ -26,7 +26,7 @@ export const logIn = (state) => {
 
 export const getRestaurants = () => {
   return (dispatch) => {
-    fetch('http://redlippedbatfish.herokuapp.com/user/restaurants')
+    fetch('https://infinite-waters-83473.herokuapp.com/user/restaurants')
       .then(res => res.json())
       .then((restaurants) => {
         dispatch({
@@ -39,7 +39,7 @@ export const getRestaurants = () => {
 
 export const getOrders = () => {
   return (dispatch) => {
-    fetch('http://redlippedbatfish.herokuapp.com/restaurant/orders/1')
+    fetch('https://infinite-waters-83473.herokuapp.com/restaurant/orders/1')
       .then(res => res.json())
       .then((orders) => {
         dispatch({
@@ -51,7 +51,7 @@ export const getOrders = () => {
 };
 
 export const completeOrder = orderNum => (dispatch) => {
-  const urlString = `http://redlippedbatfish.herokuapp.com/restaurant/orders/${orderNum}`;
+  const urlString = `https://infinite-waters-83473.herokuapp.com/restaurant/orders/${orderNum}`;
   console.log('QWERTY ACTION CALLED', orderNum, urlString);
   fetch(urlString, {
     method: 'PUT',

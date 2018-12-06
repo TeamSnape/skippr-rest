@@ -12,7 +12,6 @@ const mapDispatchToProps = dispatch => ({
   completeOrder: (orderNum) => {
     dispatch(actions.completeOrder(orderNum));
   }
-
 });
 
 const styles = StyleSheet.create({

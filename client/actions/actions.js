@@ -1,6 +1,5 @@
 // import actionType constants
 import * as types from '../constants/actionTypes';
-// require('dotenv').config();
 
 export const logEmail = (text) => ({
   type: types.LOG_EMAIL,
@@ -40,6 +39,7 @@ export const getRestaurants = () => {
 export const getOrders = () => {
   return (dispatch) => {
     fetch('https://infinite-waters-83473.herokuapp.com/restaurant/orders/1')
+    // fetch('http://localhost:3000/restaurant/orders/1')
       .then(res => res.json())
       .then((orders) => {
         dispatch({

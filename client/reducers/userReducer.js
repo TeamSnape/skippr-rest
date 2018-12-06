@@ -1,8 +1,8 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  id: '',
-  name: '',
+  id: '1',
+  name: 'Menottis',
   email: '',
   password: '',
   address: '',
@@ -78,55 +78,15 @@ const userReducer = (state=initialState, action) => {
         imagelink,
         logged,
       };
-      // fetch('http://192.168.86.234:3000/user/login', {
-      //   method: 'POST',
-      //   mode: 'cors',
-      //   headers: {
-      //     'Content-Type': 'application/json; charset=utf-8',
-      //     'Access-Control-Allow-Origin': '*',
-      //   },
-      //   body: JSON.stringify({
-      //     email: state.emailField,
-      //     password: state.passwordField,
-      //   }),
-      // })
-      //   .then(res => res.json())
-      //   .then((data) => {
-      //     id = data['user_id'];
-      //     firstName = data['user_firstname'];
-      //     lastName = data['user_lastname'];
-      //     email = data['user_email'];
-      //     phone = data['user_phone'];
-      //     emailField = '';
-      //     passwordField = '';
-      //     logged = true;
-      //     // console.log(state);
-      //     return {
-      //       ...state,
-      //       // id,
-      //       // firstName,
-      //       // lastName,
-      //       // email,
-      //       // phone,
-      //       // emailField,
-      //       // passwordField,
-      //       logged,
-      //     };
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-    case types.GET_ORDERS:
-      console.log(action.payload);
-      let orders = action.payload;
 
+    case types.GET_ORDERS:
+      const orders = action.payload;
       return {
         ...state,
         orders,
       };
 
     case types.COMPLETE_ORDER:
-      console.log('QWERTY REDUCER CALLED', action.payload);
       return {
         ...state,
       };

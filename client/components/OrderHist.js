@@ -69,11 +69,6 @@ const OrderHist = (props) => {
       <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>CUSTOMER: {fullName}</Text>
       <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black', textDecorationLine: 'underline' }}>ITEMS:</Text>
       { orderItemsArray }
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => { props.completeOrder(orderNum); }}> 
-          <Text style={styles.buttonText}>Close Order</Text>
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };

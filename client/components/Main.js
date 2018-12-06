@@ -9,13 +9,14 @@ import Swiper from 'react-native-swiper';
 
 
 const mapStateToProps = store => ({
+  id: store.user.id,
   restaurant: store.user.name,
   orders: store.user.orders,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: () => {
-    dispatch(actions.getOrders());
+  onLoad: (id) => {
+    dispatch(actions.getOrders(id));
   }
 });
 
@@ -57,8 +58,8 @@ class Main extends React.Component {
   };
 
   componentWillMount() {
-    this.props.onLoad();
-    this.interval = setInterval(this.props.onLoad, 1000);
+    this.props.onLoad(this.props.id);
+    this.interval = setInterval(() => { this.props.onLoad(this.props.id); }, 1000);
   }
 
   componentWillUnmount() {
@@ -98,7 +99,7 @@ class Main extends React.Component {
         {/* Pending Order Page */}
         <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={{ width: '100%', fontSize: 20, textAlign: 'right', color: 'gray', fontStyle: 'italic' }}> Swipe for Order HIstory &rarr; </Text>
-          <Text style={styles.userName}>Welcome {restaurantName}!</Text>
+          <Text style={styles.userName}>Welcome {this.props.restaurant}!</Text>
           <Text style={styles.header}>Pending Orders: {numOfPendingOrders}</Text>
           <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
             {pendingOrdersList}
@@ -108,7 +109,7 @@ class Main extends React.Component {
         {/* Completed Order Page */}
         <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={{ width: '100%', fontSize: 20, textAlign: 'center', color: 'gray', fontStyle: 'italic' }}> &larr; Swipe for Order HIstory                                                                                           Swipe for Manage Menu &rarr; </Text>
-          <Text style={styles.userName}>Welcome {restaurantName}!</Text>
+          <Text style={styles.userName}>Welcome {this.props.restaurant}!</Text>
           <Text style={styles.header}>Completed Orders: {numOfCompletedOrders}</Text>
           <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
             {completedOrdersList}
@@ -118,7 +119,7 @@ class Main extends React.Component {
         {/* Mnage Menu Page */}
         <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={{ width: '100%', fontSize: 20, textAlign: 'left', color: 'gray', fontStyle: 'italic' }}> &larr; Swipe for Order History</Text>
-          <Text style={styles.userName}>Welcome {restaurantName}!</Text>
+          <Text style={styles.userName}>Welcome {this.props.restaurant}!</Text>
           <Text style={styles.header}>Manage Menu</Text>
           <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
           </ScrollView>

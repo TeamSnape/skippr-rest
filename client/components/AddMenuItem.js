@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     color: 'white',
-    fontSize: 27,
+    fontSize: 18,
   },
 });
 
@@ -51,7 +51,7 @@ const AddMenuItem = (props) => {
       <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>ITEM PRICE</Text>
       <TextInput autoCapitalize='none' placeholder="Price" style={styles.form} type="password" />
       <TouchableOpacity style={styles.button} >
-        <Text style={styles.buttonText}>ADD</Text>
+        <Text style={styles.buttonText}>Add</Text>
       </TouchableOpacity>
     </View>
   );

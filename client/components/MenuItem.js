@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { View, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import FontAwesome, { Icons } from 'react-native-fontawesome';
 import store from '../store';
 import * as actions from '../actions/actions';
 
@@ -56,9 +55,17 @@ const styles = StyleSheet.create({
 const MenuItem = (props) => {
   return (
     <View style={styles.menu}>
-      <Text style={{ fontSize: 25, padding: 5, color: 'white', backgroundColor: 'lightblue', fontWeight: 'bold'}}>Menu Item:</Text>
-      <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>{props.menuItemName}    ${props.menuItemPrice}</Text>
-      <FontAwesome>{Icons.chevronLeft}</FontAwesome>
+      <Text style={{ fontSize: 25, padding: 5, color: 'white', backgroundColor: 'lightblue', fontWeight: 'bold'}}></Text>
+      <View style={{ flexDirection: 'row' }}> 
+        <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>Item Name: {props.menuItemName}</Text>
+        <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>Item Price: ${props.menuItemPrice}</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Edit</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Delete</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

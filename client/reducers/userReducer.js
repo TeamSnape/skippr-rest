@@ -1,8 +1,8 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  id: '1',
-  name: 'Menottis',
+  id: '',
+  name: '',
   email: '',
   password: '',
   address: '',

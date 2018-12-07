@@ -13,6 +13,7 @@ const initialState = {
   yelplink: '',
   imagelink: '',
   orders: [],
+  menu: [],
   logged: false
 };
 
@@ -89,6 +90,13 @@ const userReducer = (state=initialState, action) => {
     case types.COMPLETE_ORDER:
       return {
         ...state,
+      };
+
+    case types.GET_MENU:
+      const menu = action.payload;
+      return {
+        ...state,
+        menu,
       };
 
     default:

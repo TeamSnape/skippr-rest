@@ -6,11 +6,17 @@
     "ios": "expo start --ios",
     "eject": "expo eject"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts"
+    ]
+  },
   "dependencies": {
     "dotenv": "^6.2.0",
     "expo": "^31.0.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-fontawesome": "^6.0.1",
     "react-native-swiper": "^1.5.14",
     "react-navigation": "^3.0.4",
     "react-redux": "^5.1.1",

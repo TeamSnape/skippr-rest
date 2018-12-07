@@ -77,3 +77,16 @@ export const completeOrder = orderNum => (dispatch) => {
       });
     });
 };
+
+export const getMenu = () => {
+  return (dispatch) => {
+    fetch(`https://infinite-waters-83473.herokuapp.com/user/restaurants/${id}`)
+      .then(res => res.json())
+      .then((menu) => {
+        dispatch({
+          type: types.GET_MENU,
+          payload: menu,
+        });
+      });
+  };
+};

@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import Order from './Order';
 import OrderHist from './OrderHist';
-import ManageMenu from './ManageMenu';
+import AddMenuItem from './AddMenuItem';
+import MenuItem from './MenuItem';
 import Swiper from 'react-native-swiper';
 
 
@@ -12,12 +13,12 @@ const mapStateToProps = store => ({
   id: store.user.id,
   restaurant: store.user.name,
   orders: store.user.orders,
+  menu: store.user.menu,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: (id) => {
-    dispatch(actions.getOrders(id));
-  }
+  getOrders: (id) => { dispatch(actions.getOrders(id)); },
+  getMenu: (id) => { dispatch(actions.getMenu(id)); },
 });
 
 const styles = StyleSheet.create({
@@ -58,8 +59,9 @@ class Main extends React.Component {
   };
 
   componentWillMount() {
-    this.props.onLoad(this.props.id);
-    this.interval = setInterval(() => { this.props.onLoad(this.props.id); }, 1000);
+    this.props.getOrders(this.props.id);
+    this.props.getMenu(this.props.id);
+    this.interval = setInterval(() => { this.props.getOrders(this.props.id); }, 2000);
   }
 
   componentWillUnmount() {
@@ -79,14 +81,22 @@ class Main extends React.Component {
       const groupedOrdersFalse = groupedOrders[1];
       restaurantName = groupedOrders[2];
       for (let i = 0; i < groupedOrdersTrue.length; i += 1) {
-        pendingOrdersList.push(<Order key={i} order={groupedOrdersTrue[i]} />);
+        pendingOrdersList.push(<Order key={`pend${i}`} order={groupedOrdersTrue[i]} />);
       }
       for (let i = 0; i < groupedOrdersFalse.length; i += 1) {
-        completedOrdersList.push(<OrderHist key={i} order={groupedOrdersFalse[i]} />);
+        completedOrdersList.push(<OrderHist key={`comp${i}`} order={groupedOrdersFalse[i]} />);
       }
       numOfPendingOrders = pendingOrdersList.length;
       numOfCompletedOrders = completedOrdersList.length;
     }
+
+    const manageMenuArray = [];
+    if (this.props.menu !== undefined) {
+      this.props.menu.forEach((item, i) => {
+        manageMenuArray.push(<MenuItem key={`menu${i}`} menuItemName={item.menu_item_name} menuItemID={item.menu_item_id} menuItemPrice={item.menu_item_price} />);
+      });
+    }
+
     const scrollViewHeight = '80%';
 
     return (
@@ -116,12 +126,14 @@ class Main extends React.Component {
           </ScrollView>
         </View>
 
-        {/* Mnage Menu Page */}
+        {/* Manage Menu Page */}
         <View style={{flex: 1, alignItems: 'center'}}>
           <Text style={{ width: '100%', fontSize: 20, textAlign: 'left', color: 'gray', fontStyle: 'italic' }}> &larr; Swipe for Order History</Text>
           <Text style={styles.userName}>Welcome {this.props.restaurant}!</Text>
           <Text style={styles.header}>Manage Menu</Text>
+          <AddMenuItem />
           <ScrollView style={styles.scroll} style={{ width: '100%', borderWidth: 1, borderColor: 'lightgray', borderRadius: 10, height: scrollViewHeight, flexGrow: 1 }}>
+            {manageMenuArray}
           </ScrollView>
         </View>
 

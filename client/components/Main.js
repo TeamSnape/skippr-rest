@@ -7,7 +7,7 @@ import OrderHist from './OrderHist';
 import AddMenuItem from './AddMenuItem';
 import MenuItem from './MenuItem';
 import Swiper from 'react-native-swiper';
-
+import Toast from 'react-native-whc-toast';
 
 const mapStateToProps = store => ({
   id: store.user.id,

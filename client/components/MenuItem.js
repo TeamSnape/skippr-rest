@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 const styles = StyleSheet.create({
   menu: {
-    paddingBottom: 20,
+    paddingBottom: 5,
     height: 'auto',
     width: 850,
     marginTop: 14,
@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderColor: 'red',
     borderWidth: 1,
-    borderRadius: 5,
-    marginRight: 20,
-    marginLeft: 20,
+    borderRadius: 10,
+    marginBottom: 15,
+    width: '100%'
   },
   buttonText: {
     textAlign: 'center',
@@ -55,17 +55,31 @@ const styles = StyleSheet.create({
 const MenuItem = (props) => {
   return (
     <View style={styles.menu}>
-      <Text style={{ fontSize: 25, padding: 5, color: 'white', backgroundColor: 'lightblue', fontWeight: 'bold'}}></Text>
-      <View style={{ flexDirection: 'row' }}> 
-        <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>Item Name: {props.menuItemName}</Text>
-        <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>Item Price: ${props.menuItemPrice}</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Edit</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Delete</Text>
-        </TouchableOpacity>
+      <Text style={{ fontSize: 25, padding: 2, color: 'white', backgroundColor: 'lightblue', fontWeight: 'bold'}}></Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}> 
+        <Text style={{ fontSize: 25, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black', textAlign: 'left' }}>Item Name: {props.menuItemName}</Text>
+        <Text style={{ fontSize: 25, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black', textAlign: 'right' }}>Item Price: ${props.menuItemPrice}</Text>
       </View>
+      <TouchableOpacity style={{
+        padding: 7,
+        backgroundColor: '#007bff',
+        borderColor: '#007bff',
+        borderWidth: 1,
+        width: '100%',
+        borderRadius: 10,
+        marginTop: 15,
+        marginBottom: 15
+      }}>
+        <Text style={{
+          textAlign: 'center',
+          fontWeight: 'bold',
+          color: 'white',
+          fontSize: 23
+        }}>Edit</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Delete</Text>
+      </TouchableOpacity>
     </View>
   );
 };

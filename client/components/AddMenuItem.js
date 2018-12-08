@@ -26,30 +26,32 @@ const styles = StyleSheet.create({
     color: 'black'
   },
   button: {
-    marginTop: 30,
+    marginTop: 12,
     borderRadius: 10,
     backgroundColor: '#007bff',
     borderColor: '#007bff',
     borderWidth: 3,
-    padding: 5,
-    marginBottom: 15
+    padding: 7,
+    marginBottom: 15,
+    marginLeft: 15
   },
   buttonText: {
     justifyContent: 'center',
     textAlign: 'center',
     color: 'white',
-    fontSize: 18,
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });
 
 const AddMenuItem = (props) => {
   return (
     <View style={{ flexDirection: 'row' }}>
-      <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>ITEM NAME</Text>
-      <TextInput autoCapitalize='none' placeholder="Item Name" style={styles.form} type="text" />
+      <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 18, fontWeight: 'bold', color: 'black' }}>ITEM NAME: &nbsp;</Text>
+      <TextInput autoCapitalize='none' placeholder="&nbsp;Item Name" style={styles.form} type="text" />
 
-      <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 10, fontWeight: 'bold', color: 'black' }}>ITEM PRICE</Text>
-      <TextInput autoCapitalize='none' placeholder="Price" style={styles.form} type="password" />
+      <Text style={{ fontSize: 22, padding: 5, paddingLeft: 5, marginTop: 18, fontWeight: 'bold', color: 'black' }}>&nbsp; ITEM PRICE: &nbsp;</Text>
+      <TextInput autoCapitalize='none' placeholder="&nbsp;Price" style={styles.form} type="password" />
       <TouchableOpacity style={styles.button} >
         <Text style={styles.buttonText}>Add</Text>
       </TouchableOpacity>
